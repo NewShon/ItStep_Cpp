@@ -19,6 +19,7 @@ Text::Text(int size, std::string name){
 //5
 Text::Text(const Text& myObj){
 	ptr = new std::string[myObj.size];
+	size = myObj.size;
 	max_len = myObj.max_len;
 	max_word = myObj.max_word;
 	for (unsigned int i = 0; i < size; ++i)
