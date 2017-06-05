@@ -29,6 +29,18 @@ int main() {
 	std::cout << (d1 >= d2) << std::endl;
 	std::cout << (d1 <= d2) << std::endl;
 
+	d1 = d2;
+	std::cout << -d1.getDigit() << std::endl;
+
+	int x = d1;
+	double y = d2;
+	char c = d1;
+	std::cout << x << std::endl;
+	std::cout << y << std::endl;
+	std::cout << c << std::endl;
+
+	d1(100);
+	std::cout << d1.getDigit() << std::endl;
 
 	return 0;
 }
