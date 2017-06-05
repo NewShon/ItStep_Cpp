@@ -40,5 +40,16 @@ public:
 	bool operator!=(const Digit&);
 	bool operator>=(const Digit&);
 	bool operator<=(const Digit&);
-};
 
+	Digit& operator=(const Digit&);
+	Digit& operator++();
+	Digit operator++(int);
+	Digit& operator--();
+	Digit operator--(int);
+
+	operator int();
+	operator double();
+	operator char();
+
+	void operator()(const int);
+};
