@@ -63,9 +63,9 @@ auto solve(T a, T b)->decltype(a+b) {
 template<typename T>
 auto solve(T a, T b, T c)->decltype(a + b + c) {
 	T arr[3];
-	//количество корней
-	//значение
-	//значение
+	//ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ®Г°Г­ГҐГ©
+	//Г§Г­Г Г·ГҐГ­ГЁГҐ
+	//Г§Г­Г Г·ГҐГ­ГЁГҐ
 	if (a == 0 || b == 0) {
 		arr[0] = 0;
 		return *arr;
