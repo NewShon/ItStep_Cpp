@@ -75,23 +75,57 @@ auto solve(T a, T b, T c)->decltype(a + b + c) {
 	return *arr;
 }
 
+template<size_t size, typename T>
+std::array<T, size> replace(const T* array, T el, T ch_el)
+{
+	std::array<T, size> arr;
+	int i = 0;
+	for (; i < size; ++i) 
+	{
+		if (array[i] == el) 
+		{ 
+			arr[i] = ch_el;
+			++i;
+			break; 
+		}
+		else arr[i] = array[i];
+	}
+
+	for (; i < size; ++i)
+		arr[i] = array[i];
+
+	return arr;
+}
+
+template<typename T>
+T* replace_all(const T*array, int size, T el, T ch_el) 
+{
+	T *arr = new T[size];
+	for (int i = 0; i < size; ++i)
+	{
+		if (array[i] == el) arr[i] = ch_el;
+		else arr[i] = array[i];
+	}
+
+	return arr;
+}
+
 int main() {
+	int arr[] = {1,5,5,3,6};
+	int arr2[] = { 1,5,5,5,6 };
 
-	std::cout << "getMin:\t" << getMin(4.2, 5) << std::endl;
-	std::cout << "getMin:\t" << getMin(5, 4.2) << std::endl;
+	std::array<int, 5> a = replace<5>(arr, 5, 999);
+	int* a2 = replace_all(arr2, 5, 5, 999);
 
-	int arr[5] = {1,5,8,3,6};
-	std::cout << "getMax:\t" << getMax(arr, 5) << std::endl;
-	std::cout << "getMax:\t" << getMax<5>(arr) << std::endl;
-
-	sort(arr, 5);
-	std::cout << "sort:\t";
 	for (int i = 0; i < 5; i++)
-		std::cout<< arr[i] << " ";
-	
-	std::cout << "\n" << "find:\t" << find(arr, 5, 6) << std::endl;
+		std::cout << a[i] << " ";
 
-	std::cout << "solve:\t" << solve(1, 5) << std::endl;
+	std::cout<<std::endl;
+	for (int i = 0; i < 5; i++)
+		std::cout << a2[i] << " ";
+
+
+	delete[]a2; 
 
 	return 0;
 }
