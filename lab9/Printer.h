@@ -20,10 +20,10 @@ public:
 
 	bool check(std::string);
 	
-	size_t getThisCounter(){
+	size_t getThisCounter() const {
 		return this_doc_counter;
 	}
-	static size_t getAllCounter(){
+	static size_t getAllCounter() const {
 		return all_doc_counter;
 	}
 };
