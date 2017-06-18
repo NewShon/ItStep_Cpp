@@ -19,5 +19,12 @@ public:
 	void printConcordance(std::string, std::string);
 
 	bool check(std::string);
+	
+	size_t getThisCounter(){
+		return this_doc_counter;
+	}
+	static size_t getAllCounter(){
+		return all_doc_counter;
+	}
 };
 
