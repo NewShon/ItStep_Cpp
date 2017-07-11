@@ -1,0 +1,15 @@
+Задание №1 
+Перепишите следующую программу так, чтобы в ней использовалась лямбда-функция вместо функции func(). 
+Функцию show() изменять нельзя. 
+Подключите все необходимые заголовочные файлы. 
+template<typename T> 
+void show(double x, T& fp){     
+std::cout << x << " -> " << fp(x) << std::endl; 
+}  
+
+double func(double x) { return 1.8 * x + 32; } 
+
+int main(){    
+  show(10.1, func);
+  return 0; 
+ }   
