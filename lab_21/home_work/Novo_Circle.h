@@ -9,7 +9,12 @@ class Novo_Circle : public Novo_Shape
 	double center;
 public:
 	Novo_Circle(double r, double c) :
-	radius(r), center(c) {}
+	radius(r), center(c) 
+	{
+		if (radius < 0) {
+			radius = 0;
+		}
+	}
 	~Novo_Circle() {}
 
 	double getArea() {
