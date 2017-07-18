@@ -13,7 +13,7 @@ class ForwardList {
 
 public:
 	ForwardList() {}
-	~ForwardList() {}
+	~ForwardList();
 
 	size_t size() const { return list_size; }
 	bool empty() const { return list_size == 0; }
@@ -62,54 +62,55 @@ void ForwardList<T>::push_back(const T& el) {
 
 template <typename T>
 void ForwardList<T>::push_front(const T& el) {
-	node* tmp = new node;
-	tmp->data = el;
 	if (size() == 0) {
-		tmp->next = nullptr;
-		tail = tmp;
-		head = tmp;
+		create_first_node(el);
 	}
 	else {
+		node* tmp = new node;
+		tmp->data = el;
 		tmp->next = head;
 		head = tmp;
 	}
-
 	++list_size;
 }
 
 template <typename T>
 T ForwardList<T>::pop_back() {
-	if (size() != 0) {
-		node* tmp = tail;
-		T data = tmp->data;
-
-		node*ptr = head;
-		while (ptr->next != nullptr) {
-			if (ptr->next->next == nullptr) {
-				ptr->next = nullptr;
-				break;
-			}
-			ptr = ptr->next;
-		}
-		--list_size;
-		tail = ptr;
-		delete tmp;
-		return data;
+	if (size() == 0) {
+		throw std::logic_error("Error: size = 0");
 	}
-	else throw std::logic_error("Error: size = 0");
+
+	node* tmp = tail;
+	T data = tmp->data;
+
+	node*ptr = head;
+	while (ptr->next != nullptr) {
+		if (ptr->next->next == nullptr) {
+			ptr->next = nullptr;
+			break;
+		}
+		ptr = ptr->next;
+	}
+
+	--list_size;
+	tail = ptr;
+	delete tmp;
+	return data;
+
 }
 
 template <typename T>
 T ForwardList<T>::pop_front() {
-	if (size() != 0) {
-		node* tmp = head;
-		T data = tmp->data;
-		head = head->next;
-		--list_size;
-		delete tmp;
-		return data;
+	if (size() == 0) {
+		throw  std::logic_error("Error: size = 0");
 	}
-	else throw  std::logic_error("Error: size = 0");
+		
+	node* tmp = head;
+	T data = tmp->data;
+	head = head->next;
+	--list_size;
+	delete tmp;
+	return data;
 }
 
 template <typename T>
@@ -150,23 +151,26 @@ void ForwardList<T>::print() {
 
 template <typename T>
 bool ForwardList<T>::erase(const T& el) {
-	if (size() == 0){
+	if (size() == 0) {
 		throw std::logic_error("Error: size = 0");
 	}
 
 	node* cur = head;
 	node* prev = nullptr;
-	while (cur->data != el && cur != nullptr){
+	while (cur->data != el && cur != nullptr) {
 		prev = cur;
 		cur = cur->next;
 	}
 
-	if (cur != nullptr){
-		if (prev != nullptr){
+	if (cur != nullptr) {
+		if (prev != nullptr) {
 			prev->next = cur->next;
 		}
-		else{
+		else {
 			head = cur->next;
+		}
+		if (cur->next == nullptr && prev != nullptr) {
+			tail = prev;
 		}
 		delete cur;
 		--list_size;
@@ -174,4 +178,17 @@ bool ForwardList<T>::erase(const T& el) {
 	}
 
 	return false;
+}
+
+template <typename T>
+ForwardList<T>::~ForwardList() {
+	if (size() == 0) {
+		return;
+	}
+	node* cur = head;
+	while (cur != nullptr) {
+		head = cur;
+		cur = cur->next;
+		delete head;
+	}
 }
