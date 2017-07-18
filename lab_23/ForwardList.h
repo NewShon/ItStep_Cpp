@@ -94,6 +94,11 @@ T ForwardList<T>::pop_back() {
 
 	--list_size;
 	tail = ptr;
+
+	if (size() == 0) {
+		head = tail = nullptr;
+	}
+
 	delete tmp;
 	return data;
 
@@ -104,11 +109,16 @@ T ForwardList<T>::pop_front() {
 	if (size() == 0) {
 		throw  std::logic_error("Error: size = 0");
 	}
-		
+	
 	node* tmp = head;
 	T data = tmp->data;
 	head = head->next;
 	--list_size;
+
+	if (size() == 0) {
+		head = tail = nullptr;
+	}
+
 	delete tmp;
 	return data;
 }
@@ -174,6 +184,11 @@ bool ForwardList<T>::erase(const T& el) {
 		}
 		delete cur;
 		--list_size;
+
+		if (size() == 0) {
+			head = tail = nullptr;
+		}
+
 		return true;
 	}
 
@@ -182,13 +197,7 @@ bool ForwardList<T>::erase(const T& el) {
 
 template <typename T>
 ForwardList<T>::~ForwardList() {
-	if (size() == 0) {
-		return;
-	}
-	node* cur = head;
-	while (cur != nullptr) {
-		head = cur;
-		cur = cur->next;
-		delete head;
+	while (head) {
+		pop_back();
 	}
 }
